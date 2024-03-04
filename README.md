@@ -3,8 +3,8 @@
 A simple neural network consisting of two single-layer perceptrons to classify 21-digit binary numbers into three categories based on the count of 'ones' present in the number. This project implements the fundamental concepts of perceptron-based classification, including weight initialization, prediction, training, and plotting decision boundaries.
 
 <p align="center">
-  <a href="cover.png" target="_blank">
-    <img src="cover.png" alt="Perceptron Classifier" width="400">
+  <a href="./images/cover.png" target="_blank">
+    <img src="./images/cover.png" alt="Perceptron Classifier" width="400">
     </a>
 </p>
 
@@ -20,6 +20,7 @@ A simple neural network consisting of two single-layer perceptrons to classify 2
   - [💻 Technologies Used](#-technologies-used)
   - [🛠 Installation and Setup](#-installation-and-setup)
   - [🚀 Usage](#-usage)
+  - [💡 How It Works](#-how-it-works)
   - [👥 Contributing](#-contributing)
   - [📄 License](#-license)
   - [🎉 Acknowledgments](#-acknowledgments)
@@ -29,6 +30,10 @@ A simple neural network consisting of two single-layer perceptrons to classify 2
 ---
 
 ## 📖 Overview
+
+<p align="center">
+  <img src="images/animation.gif" alt="Perceptron Classifier" width="320">
+</p>
 
 This project implements a simple neural network consisting of perceptrons to classify 21-digit binary numbers into three categories based on the count of 'ones' present in the number. The categories are:
 
@@ -84,7 +89,7 @@ python perceptron.py
 ```
 
 <p align="center">
-  <img src="perceptron_gui.png" alt="Perceptron GUI" width="400">
+  <img src="images/perceptron_gui.png" alt="Perceptron GUI" width="800">
 </p>
 
 In the GUI, you can:
@@ -93,11 +98,50 @@ In the GUI, you can:
 
 - Train the perceptron models with generated binary numbers.
 
-- Visualize the decision boundaries and the distribution of binary numbers.
+- Plot the decision boundaries and the distribution of binary numbers.
+
+- Visualize the weights of the perceptrons and the learning process via real-time animations.
 
 <p align="center">
-  <img src="boundary.png" alt="Decision Boundaries" width="600">
+  <img src="images/boundary.png" alt="Decision Boundaries" width="400">
 </p>
+
+The project also includes commented code for genrating advanced visualizations and testing the perceptron models. For now, it is not recommended to run the code in the `perceptron.py` file, as it may take a long time to execute.
+
+<p align="center">
+  <img src="images/movie.gif" alt="Perceptron Classifier" width="400">
+
+## 💡 How It Works
+
+Our task is classifying 21-digit binary numbers into 3 classes:
+
+1. More than 15 ones
+2. More than 15 zeros
+3. Else
+
+We can't use a single one-layer perceptron to solve the problem for the following reasons:
+
+1. A perceptron can only classify linearly separable problems, and this problem is not linearly separable. The three classes are not linearly separable.
+
+2. Even if the problem were linearly separable, the output of the perceptron is binary, and we need to classify the input into 3 classes.
+
+With multiple single-layer perceptrons **we can** classify the 21-digit binary numbers into 3 classes in the following way:
+
+The input to the perceptrons will be the 21-digit binary number represented as a vector of 21 elements. The output of perceptron i will be 1 if there are more than i 1s in the input, and 0 otherwise.
+
+We'll set eta to 1 for simplicity.
+
+We will use a number of perceptrons as follows:
+
+1. The first perceptron will be trained to classify if the input has more than 15 1s. The weights of the perceptron will adjust during the training to find the hyperplane that separates the input into 2 classes. For example, a perceptron with the following weights will classify if the input has more than 0 1s: \(w_{0+} = [1, 1, 1, ..., 1]\). A perceptron with the following weights will classify if the input has more than 1 1s: \(w_{1+} = [0.5, 0.5, 0.5, ..., 0.5]\) And so on. Using the same method, we can construct the perceptrons that will classify if the input has more than 15 1s: \(w_{15+} = [\frac{1}{16}, \frac{1}{16}, \frac{1}{16}, ..., \frac{1}{16}]\)
+
+2. We can deduce the second class by taking the output of the 1's finders: if the output of the 6th perceptron is -1, then the input doesn't have more than 6 1s, and thus, has more than 15 0s. The same applies for the 5th perceptron and so on until the first perceptron. Alternatively, we can use a similar method to the one used for the 1's finders, but for zeros. For example, a perceptron with the following weights will classify if the input has at least 1 0: \(w_{1-} = [\frac{1}{21}, \frac{1}{21}, \frac{1}{21}, ..., \frac{1}{21}]\). A perceptron with the following weights will classify if the input has at least 15 0s: \(w_{15-} = [\frac{1}{6}, \frac{1}{6}, \frac{1}{6}, ..., \frac{1}{6}]\) And so on. Note again that the threshold is 1, so if we sum the weights and the input and the result is less than 1, then the input has at least 1 0.
+
+3. We can get the first class by taking the output of the first perceptrons, the second class by taking the output of the second perceptron - if it's -1, it means not even 6 ones, and hence -> more than 15 zeros. The third class is identified by taking the rest of the cases (the first is -1 and the second is 1).
+
+| Before training | After training |
+| --- | --- |
+| <img src="images/before.png" alt="Before training" width="400"> | <img src="images/after.png" alt="After training" width="400"> |
 
 ## 👥 Contributing
 
