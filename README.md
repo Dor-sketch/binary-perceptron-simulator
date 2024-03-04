@@ -96,8 +96,10 @@ To run the program and launch the GUI, execute the following command in the term
 python perceptron.py
 ```
 
+The GUI will open, allowing you to interact with the perceptron classifier.
+
 <p align="center">
-  <img src="images/perceptron_gui.png" alt="Perceptron GUI" width="800">
+  <img src="images/gui_animation.gif"  alt="Perceptron GUI" width="800">
 </p>
 
 In the GUI, you can:
@@ -117,7 +119,7 @@ In the GUI, you can:
 The project also includes commented code for genrating advanced visualizations and testing the perceptron models. For now, it is not recommended to run the code in the `perceptron.py` file, as it may take a long time to execute.
 
 <p align="center">
-  <img src="images/db1.png" alt="Perceptron Classifier" width="400">
+  <img src="images/Separation3.gif" alt="Perceptron Classifier" width="400">
 
   <img src="images/Separation.gif" alt="Perceptron    Classifier" width="400">
 

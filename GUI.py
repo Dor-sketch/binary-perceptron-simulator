@@ -8,7 +8,9 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 import matplotlib.animation as animation
-
+from PIL import ImageGrab
+import time
+import os
 
 class TkGUI:
     def __init__(self, master, perceptron):
@@ -130,3 +132,25 @@ class TkGUI:
 
     def animate_learning(self):
         self.perceptron.animate_learning()
+
+    from PIL import ImageGrab
+
+
+    def update_gui(self):
+        self.master.update_idletasks()
+        self.master.update()
+
+    def capture_gui(self):
+        for i in range(20):
+            # Update the GUI here. Replace `update_gui` with the actual method.
+            self.update_gui()
+
+            x = self.master.winfo_rootx()
+            y = self.master.winfo_rooty()
+            x1 = x + self.master.winfo_width()
+            y1 = y + self.master.winfo_height()
+            ImageGrab.grab().crop((x, y, x1, y1)).save("capture" + str(i) + ".png")
+            # Wait for a short time before the next iteration.
+            time.sleep(0.01)
+        os.system("convert -delay 1 -loop 0 capture*.png animation.gif")
+        os.system("rm capture*.png")
