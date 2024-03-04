@@ -32,6 +32,7 @@ class Percpetron:
         self.weights = np.random.rand(len(self.input_neuron))
         self.threshold = threshold  # see readme for more info
         self.last_input = np.zeros(len(self.input_neuron))
+        self.weights_history = [] # for plotting and analysis
 
     def dot_product(self, inputs=None):
         """
@@ -77,6 +78,8 @@ class Percpetron:
 
         while incorrect_predictions:
             for i in list(incorrect_predictions.keys()):
+                # save the weights for plotting and analysis , store both the weights and the inputs
+                self.weights_history.append(self.weights)
                 prediction = self.predict(inputs[i])
                 if prediction != labels[i]:
                     self.weights += learning_rate * \
@@ -85,7 +88,7 @@ class Percpetron:
                     # remove correct predictions from the dictionary
                     incorrect_predictions.pop(i)
 
-        print(f'weights: {self.weights}')
+
 
     def plot(self, dots, labels):
         """

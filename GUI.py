@@ -37,6 +37,10 @@ class TkGUI:
             self.master, text="Plot", command=self.plot)
         self.plot_button.pack()
 
+        self.plot_3d_button = tk.Button(
+            self.master, text="Plot 3D", command=self.plot_3d)
+        self.plot_3d_button.pack()
+
         # Canvas setup
         self.figure = Figure(figsize=(50, 5), facecolor="black")
         self.canvas = FigureCanvasTkAgg(self.figure, master=self.master)
@@ -108,3 +112,6 @@ class TkGUI:
 
     def train(self):
         self.perceptron.train()
+
+    def plot_3d(self):
+        self.perceptron.plot_decision_boundary()
