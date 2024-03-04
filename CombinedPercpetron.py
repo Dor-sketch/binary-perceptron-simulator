@@ -6,7 +6,7 @@ with more than 15 zeros. The class also contains a method to
 plot the perceptron's weights change over time.
 """
 
-from Percpetron import Percpetron, InputNeuron
+from Percpetron import Percpetron
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -17,10 +17,13 @@ from sklearn.decomposition import PCA
 
 class CombinedPercpetron:
     def __init__(self, n_inputs=21, debug=False):
-        self.one_perceptron = Percpetron(InputNeuron(n_inputs))
-        self.zero_perceptron = Percpetron(InputNeuron(n_inputs))
+        self.one_perceptron = Percpetron(n_inputs)
+        self.zero_perceptron = Percpetron(n_inputs)
         if debug:
-            for i in range(n_inputs):
+            self.fix_weights()
+
+    def fix_weights(self):
+        for i in range(len(self.one_perceptron.weights)):
                 self.one_perceptron.weights[i] = 1 / 16
                 self.zero_perceptron.weights[i] = 1 / 6
 
@@ -216,24 +219,14 @@ class CombinedPercpetron:
         plt.show()
 
     def animate_learning(self):
-        self.train(cycles=5000)
+        self.train()
         ones_history = self.one_perceptron.weights_history
         zeros_history = self.zero_perceptron.weights_history
 
-        # trim the history when converging
-        for i in range(len(ones_history) - 1, 0, -1):
-            if np.array_equal(ones_history[i], ones_history[i - 1]):
-                ones_history = ones_history[:i]
-                break
-        for i in range(len(zeros_history) - 1, 0, -1):
-            if np.array_equal(zeros_history[i], zeros_history[i - 1]):
-                zeros_history = zeros_history[:i]
-                break
-
-        # make sure the history has the same length
-        min_len = min(len(ones_history), len(zeros_history))
-        ones_history = ones_history[:min_len]
-        zeros_history = zeros_history[:min_len]
+        # make sure the history has the same length and cut from the end
+        min_length = min(len(ones_history), len(zeros_history), 100)
+        ones_history = ones_history[:min_length]
+        zeros_history = zeros_history[:min_length]
         # use 3D PCA to reduce the dimensionality of the data and see the weights change over time 3d
         pca = PCA(n_components=3)
         ones_history = pca.fit_transform(ones_history)
@@ -258,22 +251,22 @@ class CombinedPercpetron:
             y = np.linspace(-2, 2, 2)
             x, y = np.meshgrid(x, y)
             z_ones = get_surface(ones_history[frame], x, y)
-            z_zeros = get_surface(zeros_history[frame], x, y)
+            z_zeros = get_surface(zeros_history[frame], -x, y)
             ax.plot_surface(x+1, y, -z_ones, color='b', rstride=1, cstride=1, alpha=0.5, linewidth=0, antialiased=False)
             ax.plot_surface(x-1, y, z_zeros, color='r', rstride=1, cstride=1, alpha=0.5, linewidth=0, antialiased=False)
-
+            # plt.savefig(f'frame_{frame:03d}.png', transparent=True)  # save the current frame as a PNG image
 
         ax.set_xlim(-1, 1)
         ax.set_ylim(-1, 1)
         ax.set_zlim(-1, 1)
 
         ani = animation.FuncAnimation(
-            fig, update_ani, frames=len(ones_history), fargs=(ones_history, zeros_history), blit=False, interval=100, repeat=True
+            fig, update_ani, frames=len(ones_history), fargs=(ones_history, zeros_history), blit=False, interval=100, repeat=False
         )
+        ani.save(time.strftime("%Y%m%d-%H%M%S") + "weights_change.gif" , writer="pillow", fps=60)
         plt.show()
 
         # store the animation
-        ani.save("weights_change.gif", writer="pillow")
 
 
 # p = CombinedPercpetron(debug=True)

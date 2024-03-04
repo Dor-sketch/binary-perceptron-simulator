@@ -31,8 +31,8 @@ A simple neural network consisting of two single-layer perceptrons to classify 2
 
 ## 📖 Overview
 
-<p align="center">
-  <img src="images/animation.gif" alt="Perceptron Classifier" width="320">
+<p align="center" style="background-color: transparent;">
+  <img src="images/transparant_animation.gif" alt="Learning Process" width="600">
 </p>
 
 This project implements a simple neural network consisting of perceptrons to classify 21-digit binary numbers into three categories based on the count of 'ones' present in the number. The categories are:
@@ -43,7 +43,13 @@ This project implements a simple neural network consisting of perceptrons to cla
 
 The implementation demonstrates the fundamental concepts of perceptron-based classification, including weight initialization, prediction, training, and plotting decision boundaries. This project is part of my software engineering portfolio, showcasing my understanding of machine learning algorithms and my ability to implement them from scratch.
 
+---
+
 ## 🌟 Features
+
+<p align="center">
+  <img src="images/wave_animation.gif" alt="Perceptron Classifier" width="320">
+</p>
 
 - **Perceptron Training**: Trains two separate perceptrons to classify the binary numbers into the specified categories.
 - **Prediction**: Predicts the category of a new 21-digit binary number.
@@ -80,6 +86,8 @@ Install the required Python packages:
 pip install numpy matplotlib scikit-learn
 ```
 
+---
+
 ## 🚀 Usage
 
 To run the program and launch the GUI, execute the following command in the terminal:
@@ -109,7 +117,14 @@ In the GUI, you can:
 The project also includes commented code for genrating advanced visualizations and testing the perceptron models. For now, it is not recommended to run the code in the `perceptron.py` file, as it may take a long time to execute.
 
 <p align="center">
+  <img src="images/db1.png" alt="Perceptron Classifier" width="400">
+
+  <img src="images/Separation.gif" alt="Perceptron    Classifier" width="400">
+
+  <img src="images/Separation2.gif" alt="Perceptron Classifier" width="400">
+
   <img src="images/movie.gif" alt="Perceptron Classifier" width="400">
+</p>
 
 ## 💡 How It Works
 
@@ -149,7 +164,7 @@ Contributions to this project are welcome! Please feel free to fork the reposito
 
 ## 📄 License
 
-This project is open-sourced under the MIT License. See the LICENSE file for more details.
+This project is open-sourced under the MIT License. See the [LICENSE](./LICENSE) file for more information.
 
 ## 🎉 Acknowledgments
 

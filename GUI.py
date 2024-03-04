@@ -34,12 +34,20 @@ class TkGUI:
         self.train_button.pack()
 
         self.plot_button = tk.Button(
-            self.master, text="Plot", command=self.plot)
+            self.master, text="Plot Weights", command=self.plot)
         self.plot_button.pack()
 
         self.plot_3d_button = tk.Button(
-            self.master, text="Plot 3D", command=self.plot_3d)
+            self.master, text="Plot Linear Separation (2-D Plae)", command=self.plot_3d)
         self.plot_3d_button.pack()
+
+        self.fix_weights_button = tk.Button(
+            self.master, text="Fix weights", command=self.fix_weights)
+        self.fix_weights_button.pack()
+
+        self.animate_learning_button = tk.Button(
+            self.master, text="Animate Learning", command=self.animate_learning)
+        self.animate_learning_button.pack()
 
         # Canvas setup
         self.figure = Figure(figsize=(50, 5), facecolor="black")
@@ -115,3 +123,10 @@ class TkGUI:
 
     def plot_3d(self):
         self.perceptron.plot_decision_boundary()
+
+    def fix_weights(self):
+        self.perceptron.fix_weights()
+        self.canvas.draw()
+
+    def animate_learning(self):
+        self.perceptron.animate_learning()

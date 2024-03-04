@@ -11,27 +11,30 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 
-class InputNeuron:
-    def __init__(self, n_inputs=21):
-        random.seed(time.time())
-        self.units = [random.choice([0, 1]) for _ in range(n_inputs)]
+@staticmethod
+def sign(x):
+    """
+    The sign function
 
-    def __len__(self):
-        return len(self.units)
+    :param x: the input
+    :return: 1 if x >= 0, -1 otherwise
+    """
+    return 1 if x >= 0 else -1
 
 
 class Percpetron:
-    def __init__(self, InputNeuron, threshold=0.999):
+    def __init__(self, n_inputs=21, threshold=0.99):
         """
         Initialize the perceptron
 
-        :param InputNeuron: the input neuron
-        :param threshold: the threshold for the perceptron.
+        :param n_inputs: the input neurons number
+        :param threshold: the threshold for the perceptron
+            can be replaced with an extra neuron at the input layer
         """
-        self.input_neuron = InputNeuron
-        self.weights = np.random.rand(len(self.input_neuron))
+        self.input_units = np.zeros(n_inputs)
+        self.weights = np.random.rand(n_inputs)
         self.threshold = threshold  # see readme for more info
-        self.last_input = np.zeros(len(self.input_neuron))
+        self.last_input = np.zeros(len(self.input_units))
         self.weights_history = [] # for plotting and analysis
 
     def dot_product(self, inputs=None):
@@ -52,16 +55,9 @@ class Percpetron:
         :param inputs: list of 21 digits binary numbers, each list is a dot (input) represented a binary number
         :return: the predicted label of the dot
         """
-        if isinstance(inputs, str):
-            inputs = np.fromstring(inputs, sep=' ')
-        print(f'inputs: {inputs}')
-        print(f'weights: {self.weights}')
-        print(f'dot: {np.dot(self.weights, inputs)}')
-        self.last_input = inputs
-        if np.dot(self.weights, inputs) >= self.threshold:
-            return 1
-        else:
-            return -1
+
+        self.last_input = inputs # save the input for later use (GUI)
+        return sign(self.dot_product(inputs) - self.threshold)
 
     def train(self, inputs, labels, learning_rate=0.01):
         """
@@ -71,7 +67,7 @@ class Percpetron:
         :param labels: the labels of the dots
         """
         # initialize the weights to be zeros vector
-        self.weights = np.zeros(len(self.input_neuron))
+        self.weights = np.zeros(len(self.input_units))
 
         # dictionary to keep track of incorrect predictions
         incorrect_predictions = {i: True for i in range(len(inputs))}
@@ -79,7 +75,6 @@ class Percpetron:
         while incorrect_predictions:
             for i in list(incorrect_predictions.keys()):
                 # save the weights for plotting and analysis , store both the weights and the inputs
-                self.weights_history.append(self.weights)
                 prediction = self.predict(inputs[i])
                 if prediction != labels[i]:
                     self.weights += learning_rate * \
@@ -87,6 +82,7 @@ class Percpetron:
                 else:
                     # remove correct predictions from the dictionary
                     incorrect_predictions.pop(i)
+                self.weights_history.append(self.weights.copy())
 
 
 
