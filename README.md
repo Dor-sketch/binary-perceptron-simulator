@@ -3,8 +3,8 @@
 A simple neural network consisting of two single-layer perceptrons to classify 21-digit binary numbers into three categories based on the count of 'ones' present in the number. This project implements the fundamental concepts of perceptron-based classification, including weight initialization, prediction, training, and plotting decision boundaries.
 
 <p align="center">
-  <a href="./images/cover.png" target="_blank">
-    <img src="./images/cover.png" alt="Perceptron Classifier" width="400">
+  <a href="./docs/images/cover.png" target="_blank">
+    <img src="./docs/images/cover.png" alt="Perceptron Classifier" width="400">
     </a>
 </p>
 
@@ -14,16 +14,15 @@ A simple neural network consisting of two single-layer perceptrons to classify 2
 
 <!-- code_chunk_output -->
 
-- [🧠 Perceptron Classifier for Binary Numbers](#-perceptron-classifier-for-binary-numbers)
-  - [📖 Overview](#-overview)
-  - [🌟 Features](#-features)
-  - [💻 Technologies Used](#-technologies-used)
-  - [🛠 Installation and Setup](#-installation-and-setup)
-  - [🚀 Usage](#-usage)
-  - [💡 How It Works](#-how-it-works)
-  - [👥 Contributing](#-contributing)
-  - [📄 License](#-license)
-  - [🎉 Acknowledgments](#-acknowledgments)
+- [📖 Overview](#-overview)
+- [🌟 Features](#-features)
+- [💻 Technologies Used](#-technologies-used)
+- [🛠 Installation and Setup](#-installation-and-setup)
+- [🚀 Usage](#-usage)
+- [💡 How It Works](#-how-it-works)
+- [👥 Contributing](#-contributing)
+- [📄 License](#-license)
+- [🎉 Acknowledgments](#-acknowledgments)
 
 <!-- /code_chunk_output -->
 
@@ -32,7 +31,7 @@ A simple neural network consisting of two single-layer perceptrons to classify 2
 ## 📖 Overview
 
 <p align="center" style="background-color: transparent;">
-  <img src="images/transparant_animation.gif" alt="Learning Process" width="600">
+  <img src="docs/images/transparant_animation.gif" alt="Learning Process" width="600">
 </p>
 
 This project implements a simple neural network consisting of perceptrons to classify 21-digit binary numbers into three categories based on the count of 'ones' present in the number. The categories are:
@@ -48,7 +47,7 @@ The implementation demonstrates the fundamental concepts of perceptron-based cla
 ## 🌟 Features
 
 <p align="center">
-  <img src="images/wave_animation.gif" alt="Perceptron Classifier" width="320">
+  <img src="docs/images/wave_animation.gif" alt="Perceptron Classifier" width="320">
 </p>
 
 - **Perceptron Training**: Trains two separate perceptrons to classify the binary numbers into the specified categories.
@@ -99,7 +98,7 @@ python perceptron.py
 The GUI will open, allowing you to interact with the perceptron classifier.
 
 <p align="center">
-  <img src="images/gui_animation.gif"  alt="Perceptron GUI" width="800">
+  <img src="docs/images/gui_animation.gif"  alt="Perceptron GUI" width="800">
 </p>
 
 In the GUI, you can:
@@ -113,19 +112,19 @@ In the GUI, you can:
 - Visualize the weights of the perceptrons and the learning process via real-time animations.
 
 <p align="center">
-  <img src="images/boundary.png" alt="Decision Boundaries" width="400">
+  <img src="docs/images/boundary.png" alt="Decision Boundaries" width="400">
 </p>
 
 The project also includes commented code for genrating advanced visualizations and testing the perceptron models. For now, it is not recommended to run the code in the `perceptron.py` file, as it may take a long time to execute.
 
 <p align="center">
-  <img src="images/Separation3.gif" alt="Perceptron Classifier" width="400">
+  <img src="docs/images/Separation3.gif" alt="Perceptron Classifier" width="400">
 
-  <img src="images/Separation.gif" alt="Perceptron    Classifier" width="400">
+  <img src="docs/images/Separation.gif" alt="Perceptron    Classifier" width="400">
 
-  <img src="images/Separation2.gif" alt="Perceptron Classifier" width="400">
+  <img src="docs/images/Separation2.gif" alt="Perceptron Classifier" width="400">
 
-  <img src="images/movie.gif" alt="Perceptron Classifier" width="400">
+  <img src="docs/images/movie.gif" alt="Perceptron Classifier" width="400">
 </p>
 
 ## 💡 How It Works
@@ -158,7 +157,7 @@ We will use a number of perceptrons as follows:
 
 | Before training | After training |
 | --- | --- |
-| <img src="images/before.png" alt="Before training" width="400"> | <img src="images/after.png" alt="After training" width="400"> |
+| <img src="docs/images/before.png" alt="Before training" width="400"> | <img src="docs/images/after.png" alt="After training" width="400"> |
 
 ## 👥 Contributing
 
@@ -166,7 +165,7 @@ Contributions to this project are welcome! Please feel free to fork the reposito
 
 ## 📄 License
 
-This project is open-sourced under the MIT License. See the [LICENSE](./LICENSE) file for more information.
+This project is open-sourced under the MIT License. See the [LICENSE](./docs/LICENSE) file for more information.
 
 ## 🎉 Acknowledgments
 
